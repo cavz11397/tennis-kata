@@ -21,9 +21,9 @@ public class TennisGame1 implements TennisGame {
 
     public String getScore() {
         String score = "";
-        if (this.m_score1 == this.m_score2){
+        if (firstComparision(this.m_score1,this.m_score2)){
             score=messages("Love-All","Fifteen-All","Thirty-All","Deuce",m_score1);
-        }else if (this.m_score1>=4 || this.m_score2>=4){
+        }else if (secondComparision(this.m_score1,4) || secondComparision(this.m_score2,4)){
             score= winner();
         }else{
             score= inGame(score);
@@ -33,16 +33,29 @@ public class TennisGame1 implements TennisGame {
 
     public String winner(){
         int Result = m_score1-m_score2;
-        if (Result==1){
-            return "Advantage player1";
+        String score="";
+        if(secondComparision(Math.abs(Result),2)){
+            if(secondComparision(Result,2)){
+                score="Win for player1";
+            }else{
+                score="Win for player2";
+            }
+        }else{
+            if(firstComparision(Result,1)){
+                score="Advantage player1";
+            }else{
+                score="Advantage player2";
+            }
         }
-        if(Result ==-1) {
-            return "Advantage player2";
-        }
-        if (Result>=2) {
-            return "Win for player1";
-        }
-        return "Win for player2";
+        return score;
+    }
+
+    public boolean firstComparision(int num1, int num2){
+        return (num1==num2) ? true : false;
+    }
+
+    public boolean secondComparision(int num1, int num2){
+        return (num1>=num2) ? true : false;
     }
 
     public String inGame(String score){
@@ -54,7 +67,7 @@ public class TennisGame1 implements TennisGame {
 
     public String points(String score, int i){
         int pointsScore=0;
-        if (i==1){
+        if (firstComparision(i,1)){
             pointsScore = m_score1;
         }
         else {

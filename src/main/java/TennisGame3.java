@@ -16,7 +16,8 @@ public class TennisGame3 implements TennisGame {
         if (condition1(pointsPlayer1,pointsPlayer2,4,6)){
             String[] points = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
             status = points[pointsPlayer1];
-            return condition4((condition3(pointsPlayer1,pointsPlayer2)),
+            return condition4(
+                        (condition3(pointsPlayer1,pointsPlayer2)),
                         status + "-All",
                         status + "-" + points[pointsPlayer2]) ;
         } else {
@@ -53,10 +54,10 @@ public class TennisGame3 implements TennisGame {
         status = condition4(condition2(pointsPlayer2,pointsPlayer1),
                     nameFirstPlayer,nameSecondPlayer);
         return condition4(condition3(
-                        condition6(pointsPlayer1,pointsPlayer2)*
-                        condition6(pointsPlayer1,pointsPlayer2),1),
-                    "Advantage " + status,
-                    "Win for " + status);
+                            condition6(pointsPlayer1,pointsPlayer2)*
+                            condition6(pointsPlayer1,pointsPlayer2),1),
+                        "Advantage " + status,
+                        "Win for " + status);
     }
 
     public int condition6(int num1, int num2){

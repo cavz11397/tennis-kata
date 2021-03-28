@@ -50,16 +50,26 @@ public class TennisGame2 implements TennisGame
 
         score= condition3(score,
                     "Advantage player1",
-                    fifthComparision(fourthComparision(P1point,P2point) , thirdComparision(P2point,3)));
+                    fifthComparision(
+                            fourthComparision(P1point,P2point) ,
+                            thirdComparision(P2point,3)));
         score= condition3(score,
                     "Advantage player2",
-                    fifthComparision(fourthComparision(P2point,P1point) , thirdComparision(P1point,3)));
+                    fifthComparision(
+                            fourthComparision(P2point,P1point) ,
+                            thirdComparision(P1point,3)));
         score= condition3(score,
                     "Win for player1",
-                    fifthComparision(fifthComparision(thirdComparision(P1point,4), thirdComparision(P2point,0)), thirdComparision((P1point-P2point),2)));
+                    fifthComparision(
+                            fifthComparision(thirdComparision(P1point,4),
+                                            thirdComparision(P2point,0)),
+                            thirdComparision((P1point-P2point),2)));
         score= condition3(score,
                     "Win for player2",
-                    fifthComparision(fifthComparision(thirdComparision(P2point,4) , thirdComparision(P1point,0)), thirdComparision((P2point-P1point),2)));
+                    fifthComparision(
+                            fifthComparision(thirdComparision(P2point,4) ,
+                                            thirdComparision(P1point,0)),
+                            thirdComparision((P2point-P1point),2)));
         return score;
     }
     
