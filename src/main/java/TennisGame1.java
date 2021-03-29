@@ -1,8 +1,8 @@
 
 public class TennisGame1 implements TennisGame {
     
-    private int m_score1 = 0;
-    private int m_score2 = 0;
+    private int scorePlayer1 = 0;
+    private int scorePlayer2 = 0;
     private String player1Name;
     private String player2Name;
 
@@ -13,17 +13,18 @@ public class TennisGame1 implements TennisGame {
 
     public void wonPoint(String playerName) {
         if (playerName.equals("player1")){
-            this.m_score1 += 1;
+            this.scorePlayer1 += 1;
         }else{
-            this.m_score2 += 1;
+            this.scorePlayer2 += 1;
         }
     }
 
     public String getScore() {
         String score = "";
-        if (firstComparision(this.m_score1,this.m_score2)){
-            score=messages("Love-All","Fifteen-All","Thirty-All","Deuce",m_score1);
-        }else if (secondComparision(this.m_score1,4) || secondComparision(this.m_score2,4)){
+        if (Comparision.equalsNumbers(this.scorePlayer1,this.scorePlayer2)){
+            score=messages("Love-All","Fifteen-All","Thirty-All","Deuce", scorePlayer1);
+        }else if (Comparision.equalOrGreater(this.scorePlayer1,4)
+                || Comparision.equalOrGreater(this.scorePlayer2,4)){
             score= winner();
         }else{
             score= inGame(score);
@@ -32,30 +33,22 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String winner(){
-        int Result = m_score1-m_score2;
+        int Result = scorePlayer1 - scorePlayer2;
         String score="";
-        if(secondComparision(Math.abs(Result),2)){
-            if(secondComparision(Result,2)){
+        if(Comparision.equalOrGreater(Math.abs(Result),2)){
+            if(Comparision.equalOrGreater(Result,2)){
                 score="Win for player1";
             }else{
                 score="Win for player2";
             }
         }else{
-            if(firstComparision(Result,1)){
+            if(Comparision.equalsNumbers(Result,1)){
                 score="Advantage player1";
             }else{
                 score="Advantage player2";
             }
         }
         return score;
-    }
-
-    public boolean firstComparision(int num1, int num2){
-        return (num1==num2) ? true : false;
-    }
-
-    public boolean secondComparision(int num1, int num2){
-        return (num1>=num2) ? true : false;
     }
 
     public String inGame(String score){
@@ -67,12 +60,12 @@ public class TennisGame1 implements TennisGame {
 
     public String points(String score, int i){
         int pointsScore=0;
-        if (firstComparision(i,1)){
-            pointsScore = m_score1;
+        if (Comparision.equalsNumbers(i,1)){
+            pointsScore = scorePlayer1;
         }
         else {
             score+="-";
-            pointsScore = m_score2;
+            pointsScore = scorePlayer2;
         }
         score+=messages("Love","Fifteen","Thirty","Forty",pointsScore);
         return score;

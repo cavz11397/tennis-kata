@@ -16,33 +16,45 @@ public class TennisGame2 implements TennisGame
 
     public String getScore(){
         String score = "";
-        if (fifthComparision(firstComparision(P1point,P2point) , secondComparision(P1point,4))){
+        if (fifthComparision(
+                Comparision.equalsNumbers(P1point,P2point),
+                Comparision.lessNumber(P1point,4))){
             score=messages("Love","Fifteen","Thirty","",P1point)+"-All";
         }
 
-        if (fifthComparision(firstComparision(P1point,P2point) , thirdComparision(P1point, 3))){
+        if (fifthComparision(
+                Comparision.equalsNumbers(P1point,P2point),
+                Comparision.equalOrGreater(P1point, 3))){
             score = "Deuce";
         }
 
-        if (fifthComparision(fourthComparision(P1point,0) , firstComparision(P2point,0))){
+        if (fifthComparision(
+                Comparision.greaterNumber(P1point,0),
+                Comparision.equalsNumbers(P2point,0))){
             P1res=messages("","Fifteen","Thirty","Forty",P1point);
             P2res = "Love";
             score = concatenation(P1res,P2res);
         }
 
-        if (fifthComparision(fourthComparision(P2point,0) , firstComparision(P1point,0))){
+        if (fifthComparision(
+                Comparision.greaterNumber(P2point,0),
+                Comparision.equalsNumbers(P1point,0))){
             P2res= messages("","Fifteen","Thirty","Forty",P2point);
             P1res = "Love";
             score = concatenation(P1res,P2res);
         }
 
-        if (fifthComparision(fourthComparision(P1point,P2point) , secondComparision(P1point,4))){
+        if (fifthComparision(
+                Comparision.greaterNumber(P1point,P2point),
+                Comparision.lessNumber(P1point,4))){
             P1res= condition1(P1point,P1res);
             P2res= condition2(P2point,P2res);
             score= concatenation(P1res,P2res);
         }
 
-        if (fifthComparision(fourthComparision(P2point,P1point), secondComparision(P2point,4))){
+        if (fifthComparision(
+                Comparision.greaterNumber(P2point,P1point),
+                Comparision.lessNumber(P2point,4))){
             P2res= condition1(P2point,P2res);
             P1res= condition2(P1point,P1res);
             score= concatenation(P1res,P2res);
@@ -51,25 +63,25 @@ public class TennisGame2 implements TennisGame
         score= condition3(score,
                     "Advantage player1",
                     fifthComparision(
-                            fourthComparision(P1point,P2point) ,
-                            thirdComparision(P2point,3)));
+                            Comparision.greaterNumber(P1point,P2point) ,
+                            Comparision.equalOrGreater(P2point,3)));
         score= condition3(score,
                     "Advantage player2",
                     fifthComparision(
-                            fourthComparision(P2point,P1point) ,
-                            thirdComparision(P1point,3)));
+                            Comparision.greaterNumber(P2point,P1point) ,
+                            Comparision.equalOrGreater(P1point,3)));
         score= condition3(score,
                     "Win for player1",
                     fifthComparision(
-                            fifthComparision(thirdComparision(P1point,4),
-                                            thirdComparision(P2point,0)),
-                            thirdComparision((P1point-P2point),2)));
+                            fifthComparision(Comparision.equalOrGreater(P1point,4),
+                                            Comparision.equalOrGreater(P2point,0)),
+                            Comparision.equalOrGreater((P1point-P2point),2)));
         score= condition3(score,
                     "Win for player2",
                     fifthComparision(
-                            fifthComparision(thirdComparision(P2point,4) ,
-                                            thirdComparision(P1point,0)),
-                            thirdComparision((P2point-P1point),2)));
+                            fifthComparision(Comparision.equalOrGreater(P2point,4),
+                                            Comparision.equalOrGreater(P1point,0)),
+                            Comparision.equalOrGreater((P2point-P1point),2)));
         return score;
     }
     
@@ -134,22 +146,6 @@ public class TennisGame2 implements TennisGame
 
     public String condition3(String score, String message, boolean condition){
         return (condition) ? score=message : score;
-    }
-
-    public boolean firstComparision(int num1, int num2){
-        return (num1==num2) ? true : false;
-    }
-
-    public boolean secondComparision(int num1, int num2){
-        return (num1<num2) ? true : false;
-    }
-
-    public boolean thirdComparision(int num1, int num2){
-        return (num1>=num2) ? true : false;
-    }
-
-    public boolean fourthComparision(int num1, int num2){
-        return (num1>num2) ? true : false;
     }
 
     public boolean fifthComparision(boolean flag1, boolean flag2){
